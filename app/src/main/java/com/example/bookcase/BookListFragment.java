@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BookListFragment.OnFragmentInteractionListener} interface
+ * {@link BookListFragment.GetBookInterface} interface
  * to handle interaction events.
  * Use the {@link BookListFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -25,7 +27,7 @@ public class BookListFragment extends Fragment {
 
     ListView listView;
 
-    Context context;
+    Context parent;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -34,7 +36,7 @@ public class BookListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private GetBookInterface mListener;
 
     public BookListFragment() {
         // Required empty public constructor
@@ -71,36 +73,40 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_book_list,container,false);
+        listView = v.findViewById(R.id.listV);
+
+        listView.setAdapter(new ArrayAdapter<>(parent, android.R.layout.simple_list_item_1,parent.getResources().getStringArray(R.array.books)));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String books = (String) parent.getItemAtPosition(position);
+                ((GetBookInterface)parent).bookSelected(books);
+            }
+        });
+
+         return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+   /* public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.bookSelected (books);
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        this.parent = context;
     }
 
 
-    public interface OnFragmentInteractionListener {
+
+
+    public interface GetBookInterface {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void bookSelected(String books);
     }
 }
