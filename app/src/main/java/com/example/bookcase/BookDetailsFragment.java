@@ -14,7 +14,7 @@ public class BookDetailsFragment extends Fragment {
 
   //  private OnFragmentInteractionListener mListener;
     TextView textView;
-    String bookName = "";
+    String bookName ;
 
     public static final String BOOK_KEY = "book_name";
 
@@ -35,32 +35,13 @@ public class BookDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_details,container,false);
+        textView = textView.findViewById(R.id.bookTitle);
+        return view;
     }
 
-
-
-    /*// TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }*/
-
-
-    /*public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
-
-        /* @Override
-     public void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-         if (getArguments() != null) {
-             mParam1 = getArguments().getString(ARG_PARAM1);
-             mParam2 = getArguments().getString(ARG_PARAM2);
-         }
-     }
-
- */
+    public void bookSelected(){
+        bookName = getArguments().getString("book");
+        textView.setText(bookName);
+    }
 }
