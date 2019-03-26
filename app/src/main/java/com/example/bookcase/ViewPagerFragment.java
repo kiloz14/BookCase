@@ -4,12 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -74,10 +78,18 @@ public class ViewPagerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_view_pager, container, false);
-        textView = view.findViewById(textView);
-        detailsFragment = new BookDetailsFragment();
-
+        textView = view.findViewById(R.id.textView);
+        textView.setText("Swipe");
         final String[] listOfBooks =  this.getResources().getStringArray(R.array.books);
+        detailsFragment = new BookDetailsFragment();
+        viewPager = view.findViewById(R.id.viewPager);
+
+        pagerAdapter = new PagerAdapter(getChildFragmentManager());
+
+        for(int i = 0 ; i < listOfBooks.length; i++){
+            detailsFragment = BookDetailsFragment.newInstance(listOfBooks[i]);
+            pagerAdapter.addFragment(detailsFragment);
+        }
 
 
 
@@ -121,5 +133,31 @@ public class ViewPagerFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    class  PagerAdapter extends FragmentStatePagerAdapter{
+        ArrayList<BookDetailsFragment> pagers;
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+
+            pagers = new ArrayList<>();
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return pagers.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return pagers.size();
+        }
+
+
+        public void addFragment(BookDetailsFragment fragment){
+            pagers.add(fragment);
+        }
     }
 }
