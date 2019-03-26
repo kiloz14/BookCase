@@ -9,9 +9,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     BookDetailsFragment detailsFragment;
     BookListFragment    listFragment;
-   // FragmentManager fragmentManager;
-
-    public static  final String BOOK_KEY = "book";
+    ViewPagerFragment   viewPagerFragment;
+   // public static  final String BOOK_KEY = "book";
     boolean singlePane;
 
     @Override
@@ -23,7 +22,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         singlePane = findViewById(R.id.container2) == null;
         detailsFragment = new BookDetailsFragment();
         listFragment = new BookListFragment();
-        addFragment(listFragment,R.id.container1);
+        viewPagerFragment = new ViewPagerFragment();
+
 
   /*      detailsFragmentf = getSupportFragmentManager();
 

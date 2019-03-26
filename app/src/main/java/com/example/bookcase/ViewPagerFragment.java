@@ -91,7 +91,7 @@ public class ViewPagerFragment extends Fragment {
             pagerAdapter.addFragment(detailsFragment);
         }
 
-
+        viewPager.setAdapter(pagerAdapter);
 
         return view;
     }
