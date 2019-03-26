@@ -57,7 +57,7 @@ public class BookDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_book_details,container,false);
         textView = textView.findViewById(R.id.bookTitle);
 
-      //  displayBookSelected(bookName);
+        displayBookSelected(bookName);
         return view;
     }
 
@@ -85,6 +85,10 @@ public class BookDetailsFragment extends Fragment {
         mListener = null;
     }
 
+    public void displayBookSelected(String bookName) {
+        textView.setText(bookName);
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -92,9 +96,9 @@ public class BookDetailsFragment extends Fragment {
 
 
 
-    public void displayBookSelected(){
+    /*public void displayBookSelected(bookName){
         // bookName = getArguments().getString(BOOK_KEY);
         textView.setText(bookName);
-    }
+    }*/
 
 }

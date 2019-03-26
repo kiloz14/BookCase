@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     BookDetailsFragment detailsFragment;
     BookListFragment    listFragment;
-    FragmentManager fragmentManager;
+   // FragmentManager fragmentManager;
 
     public static  final String BOOK_KEY = "book";
     boolean singlePane;
@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         singlePane = findViewById(R.id.container2) == null;
-      //  detailsFragment = new BookDetailsFragment();
+        detailsFragment = new BookDetailsFragment();
         listFragment = new BookListFragment();
         addFragment(listFragment,R.id.container1);
 
-        /*detailsFragmentf = getSupportFragmentManager();
+  /*      detailsFragmentf = getSupportFragmentManager();
 
         detailsFragmentf.beginTransaction()
                 .replace(R.id.container1, new BookListFragment())
@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 */
 
         if(!singlePane){
+
+            addFragment(listFragment,R.id.container1);
             addFragment(detailsFragment,R.id.container2);
         }
 
@@ -48,21 +50,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     @Override
     public void bookSelected(String books) {
-        if(singlePane){
-            Bundle bundle = new Bundle();
-            bundle.putString(BOOK_KEY,books);
-            detailsFragment.setArguments(bundle);
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container1,detailsFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
-        else{
-            Bundle bundle = new Bundle();
-            bundle.putString("books", books);
-            detailsFragment.setArguments(bundle);
-            detailsFragment.displayBookSelected();
+
+        detailsFragment.displayBookSelected(books);
         }
     }
-}
+
