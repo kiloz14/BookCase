@@ -78,8 +78,8 @@ public class ViewPagerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_view_pager, container, false);
-        textView = view.findViewById(R.id.textView);
-        textView.setText("Swipe");
+        //textView = view.findViewById(R.id.textView);
+        //textView.setText("Swipe");
         final String[] listOfBooks =  this.getResources().getStringArray(R.array.books);
         detailsFragment = new BookDetailsFragment();
         viewPager = view.findViewById(R.id.viewPager);
@@ -103,16 +103,7 @@ public class ViewPagerFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+
 
     @Override
     public void onDetach() {

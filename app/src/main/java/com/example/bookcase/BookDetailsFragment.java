@@ -25,7 +25,8 @@ public class BookDetailsFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     TextView textView;
     String bookName;
-    public static final String BOOK_KEY = "book";
+
+    public static final String BOOK_KEY = "bookTitle";
 
     public BookDetailsFragment() {
         // Required empty public constructor
@@ -46,7 +47,7 @@ public class BookDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             bookName = getArguments().getString(BOOK_KEY);
-           // mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -55,35 +56,15 @@ public class BookDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_book_details,container,false);
-        textView = textView.findViewById(R.id.bookTitle);
+        textView = view.findViewById(R.id.bookTitle);
 
         displayBookSelected(bookName);
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     public void displayBookSelected(String bookName) {
         textView.setText(bookName);
@@ -96,9 +77,6 @@ public class BookDetailsFragment extends Fragment {
 
 
 
-    /*public void displayBookSelected(bookName){
-        // bookName = getArguments().getString(BOOK_KEY);
-        textView.setText(bookName);
-    }*/
+
 
 }

@@ -1,7 +1,6 @@
 package com.example.bookcase;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -25,17 +24,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         viewPagerFragment = new ViewPagerFragment();
 
 
-  /*      detailsFragmentf = getSupportFragmentManager();
-
-        detailsFragmentf.beginTransaction()
-                .replace(R.id.container1, new BookListFragment())
-                .commit();
-*/
 
         if(!singlePane){
 
             addFragment(listFragment,R.id.container1);
             addFragment(detailsFragment,R.id.container2);
+
+        }else{
+            addFragment(viewPagerFragment,R.id.container3);
         }
 
     }
