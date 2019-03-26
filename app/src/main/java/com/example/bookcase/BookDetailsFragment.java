@@ -1,5 +1,6 @@
 package com.example.bookcase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,26 +11,44 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link BookDetailsFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link BookDetailsFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class BookDetailsFragment extends Fragment {
 
-  //  private OnFragmentInteractionListener mListener;
-    TextView textView;
-    String bookName ;
 
-    public static final String BOOK_KEY = "book_name";
+    private OnFragmentInteractionListener mListener;
+    TextView textView;
+    String bookName;
+    public static final String BOOK_KEY = "book";
 
     public BookDetailsFragment() {
         // Required empty public constructor
     }
 
 
+    public static BookDetailsFragment newInstance(String book) {
+        BookDetailsFragment fragment = new BookDetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(BOOK_KEY, book);
 
-    // TODO: Rename and change types and number of parameters
-    public static BookDetailsFragment newInstance() {
-
-        return new BookDetailsFragment();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            bookName = getArguments().getString(BOOK_KEY);
+           // mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,11 +56,45 @@ public class BookDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_book_details,container,false);
         textView = textView.findViewById(R.id.bookTitle);
+
+      //  displayBookSelected(bookName);
         return view;
     }
 
-    public void bookSelected(){
-        bookName = getArguments().getString("book");
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+
+    public void displayBookSelected(){
+        // bookName = getArguments().getString(BOOK_KEY);
         textView.setText(bookName);
     }
+
 }
