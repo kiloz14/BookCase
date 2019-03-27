@@ -11,18 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BookDetailsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BookDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class BookDetailsFragment extends Fragment {
 
 
-    private OnFragmentInteractionListener mListener;
+
     TextView textView;
     String bookName;
 
@@ -70,10 +63,6 @@ public class BookDetailsFragment extends Fragment {
         textView.setText(bookName);
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
 
 

@@ -26,23 +26,37 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         if(!singlePane){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container1, listFragment)
+                    .addToBackStack(null)
+                    .commit();
 
-            addFragment(listFragment,R.id.container1);
-            addFragment(detailsFragment,R.id.container2);
-
+            //addFragment(listFragment,R.id.container1);
+            //addFragment(detailsFragment,R.id.container2);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container2, listFragment)
+                    .commit();
         }else{
-            addFragment(viewPagerFragment,R.id.container3);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container3, viewPagerFragment)
+                    .commit();
+
+            //addFragment(viewPagerFragment,R.id.container3);
         }
 
     }
 
-    private void addFragment(Fragment fragment,int id) {
-        getSupportFragmentManager().beginTransaction()
+ /*   private void addFragment(Fragment fragment,int id) {
+        getSupportFragmentManager()
+                .beginTransaction()
                 .replace(id,fragment)
                 .addToBackStack(null)
                 .commit();
     }
-
+*/
 
     @Override
     public void bookSelected(String books) {
